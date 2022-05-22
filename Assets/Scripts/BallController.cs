@@ -7,13 +7,16 @@ public class BallController : MonoBehaviour
     
     public Rigidbody rb;
     public float zSpeed = 10f;
-    float topSpeed = 1;
-
+    public Camera cam;
+    bool swiping = true;
+    int layers;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        Time.timeScale = 1f;
+
+        layers = LayerMask.GetMask("TransparentFX");
         
     }
 
@@ -22,23 +25,56 @@ public class BallController : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, zSpeed); // Keep Speed
 
-        Swipe();
-
-        
     }
+    void Update()
+    {
+        Swipe();
+    }
+    
+
     public void Swipe()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began )
+        if (Input.touchCount > 0)
         {
-            Vector3 tp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            // TRÝAL Physics.Raycast(tp,Camera.main.)
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                Vector3 rayPoint;
+                Ray ray = cam.ScreenPointToRay(Input.GetTouch(0).position);
+                if (Physics.Raycast(ray, out RaycastHit raycastHitInfo ,10 , layers))
+                {
+                    rayPoint = raycastHitInfo.point;
+                    if (Mathf.Abs(rayPoint.x - transform.position.x) < .2)
+                    {
+                        swiping = true;
+                    }
+                }
+
+            }
+            else if ((Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary) && swiping)
+            {
+                Vector3 rayPoint;
+                Ray ray = cam.ScreenPointToRay(Input.GetTouch(0).position);
+                if (Physics.Raycast(ray, out RaycastHit raycastHitInfo, 10, layers))
+                {
+                    rayPoint = raycastHitInfo.point;
+                    Debug.Log(raycastHitInfo.point);
+
+                    if (rayPoint.x != rb.transform.position.x)
+                    {
+                        rb.velocity = new Vector3((rayPoint.x - rb.transform.position.x) * 15, rb.velocity.y, rb.velocity.z);
+                    }
+                }
+                else
+                {
+                    swiping = false;
+                }
+
+            }
         }
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved )
+        else
         {
-            Vector3 tp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            Touch t1 = Input.GetTouch(0);
-            rb.position = new Vector3(rb.position.x + (t1.deltaPosition.x / 300), rb.position.y, rb.position.z);
-            //rb.velocity = new Vector3(t1.deltaPosition.x/6, rb.velocity.y, rb.velocity.z);
+            swiping = false;
+            //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
         }
     }
 }
