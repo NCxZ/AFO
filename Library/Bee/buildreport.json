@@ -1,0 +1,20 @@
+{
+"instructions_readme": "1) Open Chrome, 2) go to chrome://tracing, 3) click Load, 4) navigate to this file.",
+
+"traceEvents":[
+{ "pid": "Unity", "ph":"M", "name": "process_name", "args": {"name": "Unity"} },
+{ "pid": "Unity", "ph":"M", "name": "process_sort_index", "args": {"sort_index": -100} },
+{ "pid": "Unity", "tid": 1, "ph":"M", "name": "thread_name", "args": {"name": ""} },
+{ "pid": "Unity", "tid": 1,"ts": 945271044497.136,"dur": 5317242.13552281, "ph":"X", "name": "Build player"},
+{ "pid": "Unity", "tid": 1,"ts": 945271055936.16,"dur": 28999.8449523613, "ph":"X", "name": "Preprocess Player"},
+{ "pid": "Unity", "tid": 1,"ts": 945271125324.657,"dur": 5194723.98028241, "ph":"X", "name": "Prepare For Build"},
+{}
+
+],
+"meta_datetime": "05/22/2022 16:33:02",
+"meta_command_line": "\"C:/Program Files/Unity 2021.2.7f1/Editor/Unity.exe\" -projectpath \"C:/Users/Fatih/A Foe\" -useHub -hubIPC -cloudEnvironment production -hubSessionId 3c1d07d0-d9bb-11ec-ab07-fd4a2d258a6e",
+"meta_command_line_args": "C:/Program Files/Unity 2021.2.7f1/Editor/Unity.exe -projectpath C:/Users/Fatih/A Foe -useHub -hubIPC -cloudEnvironment production -hubSessionId 3c1d07d0-d9bb-11ec-ab07-fd4a2d258a6e",
+"meta_user_name": "Fatih",
+"meta_os_version": "Microsoft Windows NT 10.0.19044.0",
+"meta_cpu_count": "12"
+}
