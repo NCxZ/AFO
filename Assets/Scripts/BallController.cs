@@ -14,8 +14,6 @@ public class BallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
-
         layers = LayerMask.GetMask("TransparentFX");
         
     }
@@ -57,7 +55,6 @@ public class BallController : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit raycastHitInfo, 10, layers))
                 {
                     rayPoint = raycastHitInfo.point;
-                    Debug.Log(raycastHitInfo.point);
 
                     if (rayPoint.x != rb.transform.position.x)
                     {
