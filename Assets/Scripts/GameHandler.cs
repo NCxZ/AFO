@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
+    public bool paused;
     public GameObject ball;
     public GameObject[] obstacles;
 
@@ -23,6 +24,7 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        paused = false;
         Time.timeScale = 1;
         textmesh = textobj.GetComponent(typeof(TMP_Text)) as TMP_Text;
         textmeshEndGame = textobjGameEnder.GetComponent(typeof(TMP_Text)) as TMP_Text;
@@ -57,7 +59,7 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
-            if (Input.touchCount>0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            if (!paused && Input.touchCount>0 && Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 textobjGameEnder.active = false;
                 SceneManager.LoadScene("Game");

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ButtonHandler : MonoBehaviour
 {
+    public GameObject pause;
+    public GameObject resume;
+    public GameHandler gameobj;
     public void StartGame()
     {
         Debug.Log("Game Started");
@@ -15,5 +18,21 @@ public class ButtonHandler : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void PauseGame()
+    {
+        if (Time.timeScale != 0)
+        {
+            gameobj.paused = true;
+            Time.timeScale = 0;
+            pause.active = false;
+        }
+        else
+        {
+            gameobj.paused = false;
+            Time.timeScale = 1;
+            pause.active = true;
+        }
     }
 }
