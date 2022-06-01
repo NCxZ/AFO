@@ -21,6 +21,7 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, zSpeed); // Keep Speed
 
     }

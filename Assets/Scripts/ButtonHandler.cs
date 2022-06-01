@@ -10,7 +10,6 @@ public class ButtonHandler : MonoBehaviour
     public GameHandler gameobj;
     public void StartGame()
     {
-        Debug.Log("Game Started");
         SceneManager.LoadScene("Game");
     }
 
